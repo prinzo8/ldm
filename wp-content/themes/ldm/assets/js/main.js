@@ -196,9 +196,8 @@
    * TRANSITIONS DES UNIVERS
    *
    * - Luminaires
-   * - Art de la table
-   */
-  $$('[data-transition-link], a[href="#luminaires"], a[href="#table"]').forEach((link) => {
+     */
+  $$('[data-transition-link], a[href="#luminaires"]').forEach((link) => {
     link.addEventListener('click', (event) => {
 
       const target = link.getAttribute('href');
@@ -214,15 +213,14 @@
             behavior: reducedMotion ? 'auto' : 'smooth',
             block: 'start'
           });
-        },
-        target === '#table' ? 'table' : 'light'
+        }, 'light'
       );
     });
   });
 
 
   /*
-   * EXPLORER LES UNIVERS
+   * EXPLORER LES LUMINAIRES
    *
    * Le CTA #univers utilise maintenant exactement
    * le même écran de chargement.
@@ -358,22 +356,203 @@
     });
   }
 
-  const modal = $('[data-product-modal]'); let lastFocused = null;
+  const modal = $('[data-product-modal]');
+  let lastFocused = null;
+
   if (modal) {
-    const modalImage = $('[data-modal-image]', modal); const modalName = $('[data-modal-name]', modal); const modalNumber = $('[data-modal-number]', modal);
-    const modalCategory = $('[data-modal-category]', modal); const modalDescription = $('[data-modal-description]', modal); const modalPrice = $('[data-modal-price]', modal);
-    const modalAvailability = $('[data-modal-availability]', modal); const modalWhatsapp = $('[data-modal-whatsapp]', modal);
-    const close = () => { modal.classList.add('is-closing'); modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true'); body.classList.remove('modal-is-open'); window.setTimeout(() => modal.classList.remove('is-closing'), 550); lastFocused?.focus(); };
-    const open = (card, trigger) => {
-      lastFocused = trigger; const data = card.dataset; modalImage.src = data.productImage; modalImage.alt = data.productAlt; modalName.textContent = data.productName; modalNumber.textContent = data.productNumber;
-      modalCategory.textContent = data.productCategory; modalDescription.textContent = data.productDescription; modalPrice.textContent = data.productPrice; modalAvailability.textContent = data.productAvailability;
-      modalWhatsapp.href = `https://wa.me/2250700000000?text=${encodeURIComponent(`Bonjour Lumière du Monde, je souhaite en savoir plus sur ${data.productName}.`)}`;
-      modalWhatsapp.hidden = data.productAvailability === 'Indisponible'; modal.classList.remove('is-closing'); modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false'); body.classList.add('modal-is-open');
-      window.setTimeout(() => $('[data-close-modal]', modal)?.focus(), 200);
+    const modalImage = $('[data-modal-image]', modal);
+    const modalName = $('[data-modal-name]', modal);
+    const modalNumber = $('[data-modal-number]', modal);
+    const modalCategory = $('[data-modal-category]', modal);
+    const modalDescription = $('[data-modal-description]', modal);
+    const modalPrice = $('[data-modal-price]', modal);
+    const modalAvailability = $('[data-modal-availability]', modal);
+    const modalQuantity = $('[data-modal-cart-quantity]', modal);
+    const modalAdd = $('[data-modal-cart-add]', modal);
+    const modalMinus = $('[data-modal-cart-minus]', modal);
+
+    let currentProductId = null;
+
+    const getCart = () => {
+      try {
+        return JSON.parse(localStorage.getItem('ldmCart') || '{}');
+      } catch {
+        return {};
+      }
     };
-    $$('[data-open-product]').forEach((trigger) => trigger.addEventListener('click', () => open(trigger.closest('[data-product-card]'), trigger)));
-    $$('[data-close-modal]', modal).forEach((button) => button.addEventListener('click', close));
-    window.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal.classList.contains('is-open')) close(); });
+
+    const saveCart = (cart) => {
+      localStorage.setItem('ldmCart', JSON.stringify(cart));
+      document.dispatchEvent(new CustomEvent('ldm:cart-updated'));
+    };
+
+    const updateQuantity = () => {
+      if (!currentProductId || !modalQuantity) return;
+
+      const cart = getCart();
+      const quantity = Number(cart[currentProductId] || 0);
+      modalQuantity.textContent = quantity;
+    };
+
+    const changeQuantity = (delta) => {
+      if (!currentProductId) return;
+
+      const cart = getCart();
+      const current = Number(cart[currentProductId] || 0);
+      const next = Math.max(0, current + delta);
+
+      if (next === 0) {
+        delete cart[currentProductId];
+      } else {
+        cart[currentProductId] = next;
+
+        const productMeta = JSON.parse(
+          localStorage.getItem('ldmCartMeta') || '{}'
+        );
+
+        if (!productMeta[currentProductId]) {
+          productMeta[currentProductId] = {
+            name: String(modalName?.textContent || '').trim(),
+            number: String(modalNumber?.textContent || '').trim()
+          };
+
+          localStorage.setItem(
+            'ldmCartMeta',
+            JSON.stringify(productMeta)
+          );
+        }
+      }
+
+      saveCart(cart);
+      updateQuantity();
+    };
+
+    const close = () => {
+      modal.classList.add('is-closing');
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      body.classList.remove('modal-is-open');
+
+      window.setTimeout(
+        () => modal.classList.remove('is-closing'),
+        550
+      );
+
+      lastFocused?.focus();
+    };
+
+    const open = (card, trigger) => {
+      if (!card) return;
+
+      lastFocused = trigger;
+
+      const data = card.dataset;
+      currentProductId =
+        data.productId ||
+        data.productNumber ||
+        data.productName;
+
+      // Sauvegarder le vrai nom et le numéro du produit
+      // pour le panier.
+      if (currentProductId) {
+        const productMeta = JSON.parse(
+          localStorage.getItem('ldmCartMeta') || '{}'
+        );
+
+        productMeta[currentProductId] = {
+          name: String(data.productName || '').trim(),
+          number: String(data.productNumber || '').trim()
+        };
+
+        localStorage.setItem(
+          'ldmCartMeta',
+          JSON.stringify(productMeta)
+        );
+      }
+
+      if (modalImage) {
+        modalImage.src = data.productImage || '';
+        modalImage.alt = data.productAlt || data.productName || '';
+      }
+
+      if (modalName) modalName.textContent = data.productName || '';
+      if (modalNumber) modalNumber.textContent = data.productNumber || '';
+      if (modalCategory) modalCategory.textContent = data.productCategory || '';
+      if (modalDescription) modalDescription.textContent = data.productDescription || '';
+      if (modalPrice) modalPrice.textContent = data.productPrice || '';
+      if (modalAvailability) modalAvailability.textContent = data.productAvailability || '';
+
+      updateQuantity();
+
+      modal.classList.remove('is-closing');
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      body.classList.add('modal-is-open');
+
+      window.setTimeout(
+        () => $('[data-close-modal]', modal)?.focus(),
+        200
+      );
+    };
+
+    $$('[data-open-product]').forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        open(trigger.closest('[data-product-card]'), trigger);
+      });
+    });
+
+    modalAdd?.addEventListener('click', () => changeQuantity(1));
+
+    const modalAddProduct = $('[data-modal-cart-add-product]', modal);
+
+    modalAddProduct?.addEventListener('click', () => {
+      if (!currentProductId) return;
+
+      const cart = getCart();
+      const quantity = Number(cart[currentProductId] || 0);
+
+      const productMeta = JSON.parse(
+        localStorage.getItem('ldmCartMeta') || '{}'
+      );
+
+      if (!productMeta[currentProductId]) {
+        productMeta[currentProductId] = {
+          name: String(modalName?.textContent || '').trim(),
+          number: String(modalNumber?.textContent || '').trim()
+        };
+
+        localStorage.setItem(
+          'ldmCartMeta',
+          JSON.stringify(productMeta)
+        );
+      }
+
+      cart[currentProductId] = Math.max(1, quantity);
+      saveCart(cart);
+      updateQuantity();
+
+      document.querySelector('[data-cart-open]')?.classList.add('is-added');
+
+      window.setTimeout(() => {
+        document.querySelector('[data-cart-open]')?.classList.remove('is-added');
+      }, 700);
+    });
+
+    modalMinus?.addEventListener('click', () => changeQuantity(-1));
+
+    $$('[data-close-modal]', modal).forEach((button) => {
+      button.addEventListener('click', close);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (
+        event.key === 'Escape' &&
+        modal.classList.contains('is-open')
+      ) {
+        close();
+      }
+    });
   }
 })();
 
@@ -533,4 +712,569 @@
       closeLegal();
     }
   });
+})();
+
+
+/* ============================================================
+   LDM_CART_DRAWER_V2
+   ============================================================ */
+(() => {
+  const drawer = document.querySelector("[data-cart-drawer]");
+  const trigger = document.querySelector("[data-cart-open]");
+
+  if (!drawer || !trigger) {
+    console.warn("LDM CART: bouton ou panneau introuvable", {
+      trigger: !!trigger,
+      drawer: !!drawer
+    });
+    return;
+  }
+
+  const count = document.querySelector("[data-cart-count]");
+  const items = drawer.querySelector("[data-cart-items]");
+  const total = drawer.querySelector("[data-cart-total]");
+  const closeButton = drawer.querySelector("[data-cart-close]");
+
+  const getCart = () => {
+    try {
+      return JSON.parse(localStorage.getItem("ldmCart") || "{}");
+    } catch (error) {
+      console.warn("LDM CART: panier localStorage invalide", error);
+      return {};
+    }
+  };
+
+  const getTotalQty = () => {
+    const cart = getCart();
+
+    return Object.values(cart).reduce((sum, value) => {
+      const qty = Number(value);
+      return sum + (Number.isFinite(qty) && qty > 0 ? qty : 0);
+    }, 0);
+  };
+
+  const getCartMeta = () => {
+    try {
+      return JSON.parse(localStorage.getItem("ldmCartMeta") || "{}");
+    } catch {
+      return {};
+    }
+  };
+
+  const saveCart = (cart) => {
+    localStorage.setItem("ldmCart", JSON.stringify(cart));
+    document.dispatchEvent(new CustomEvent("ldm:cart-updated"));
+  };
+
+  const updateCount = () => {
+    const qty = getTotalQty();
+
+    if (count) {
+      count.textContent = `${qty}`;
+    }
+
+    const totalLabel = drawer.querySelector("[data-cart-total]");
+
+    if (totalLabel) {
+      totalLabel.textContent =
+        `${qty} article${qty > 1 ? "s" : ""}`;
+    }
+  };
+
+  const renderCart = () => {
+    if (!items) return;
+
+    const cart = getCart();
+    const meta = getCartMeta();
+    const products = window.ldmCartProducts || {};
+
+    const entries = Object.entries(cart)
+      .map(([id, value]) => {
+        const qty = Number(value);
+
+        if (!Number.isFinite(qty) || qty <= 0) {
+          return null;
+        }
+
+        const product =
+          meta[id] ||
+          products[id] ||
+          {};
+
+        const name =
+          product.name ||
+          product.productName ||
+          product.title ||
+          "Produit";
+
+        const number =
+          product.number ||
+          product.productNumber ||
+          id;
+
+        return {
+          id,
+          qty,
+          name,
+          number
+        };
+      })
+      .filter(Boolean);
+
+    if (!entries.length) {
+      items.innerHTML =
+        '<p class="ldm-cart__empty">Votre panier est vide.</p>';
+
+      updateCount();
+      return;
+    }
+
+    items.innerHTML = entries.map((item) => `
+      <div class="ldm-cart__item" data-cart-item="${item.id}">
+        <div class="ldm-cart__item-info">
+          <strong class="ldm-cart__item-name">${item.name}</strong>
+          <span class="ldm-cart__item-number">${item.number}</span>
+        </div>
+
+        <div class="ldm-cart__item-quantity">
+          <button
+            type="button"
+            class="cart-qty__button cart-cursor-black"
+            data-cart-minus
+            data-cart-id="${item.id}"
+            aria-label="Diminuer la quantité">
+            −
+          </button>
+
+          <span data-cart-quantity="${item.id}">${item.qty}</span>
+
+          <button
+            type="button"
+            class="cart-qty__button cart-cursor-black"
+            data-cart-add
+            data-cart-id="${item.id}"
+            aria-label="Augmenter la quantité">
+            +
+          </button>
+        </div>
+      </div>
+    `).join("");
+
+    updateCount();
+  };
+
+  const changeCartQuantity = (id, delta) => {
+    if (!id) return;
+
+    const cart = getCart();
+    const current = Number(cart[id] || 0);
+    const next = Math.max(0, current + delta);
+
+    if (next <= 0) {
+      delete cart[id];
+    } else {
+      cart[id] = next;
+    }
+
+    saveCart(cart);
+    renderCart();
+  };
+
+  // Le bouton "Vers paiement" est géré par
+  // le module LDM CART PAYMENT CHOICE plus bas.
+
+  items?.addEventListener("click", (event) => {
+    const button = event.target.closest(
+      "[data-cart-add], [data-cart-minus]"
+    );
+
+    if (!button) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const id = button.dataset.cartId;
+
+    if (button.hasAttribute("data-cart-add")) {
+      changeCartQuantity(id, 1);
+    } else {
+      changeCartQuantity(id, -1);
+    }
+  });
+
+  const openCart = (event) => {
+    if (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+
+    renderCart();
+    updateCount();
+
+    drawer.removeAttribute("hidden");
+    drawer.hidden = false;
+    drawer.classList.add("is-open", "is-visible");
+    drawer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("cart-is-open");
+
+    console.log("LDM CART: ouvert");
+  };
+
+  const closeCart = (event) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    drawer.classList.remove("is-open", "is-visible");
+    drawer.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("cart-is-open");
+
+    console.log("LDM CART: fermé");
+  };
+
+  trigger.addEventListener("click", openCart, true);
+  closeButton?.addEventListener("click", closeCart, true);
+
+  document.addEventListener("click", (event) => {
+    if (!document.body.classList.contains("cart-is-open")) {
+      return;
+    }
+
+    if (!drawer.contains(event.target)) {
+      closeCart(event);
+    }
+  });
+
+  document.addEventListener("ldm:cart-updated", updateCount);
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === "ldmCart") updateCount();
+  });
+
+  updateCount();
+
+  console.log("LDM CART: initialisé");
+})();
+ 
+
+/* LDM_CART_PRELOADER_FIX */
+(() => {
+  const revealCart = () => {
+    document.documentElement.classList.remove('is-loading');
+    document.body.classList.add('is-loaded');
+  };
+
+  if (document.readyState === 'complete') {
+    window.setTimeout(revealCart, 50);
+  } else {
+    window.addEventListener('load', () => {
+      window.setTimeout(revealCart, 50);
+    }, { once: true });
+  }
+})();
+
+
+/* LDM FINAL CART MOTION JS */
+(() => {
+    const setReady = () => {
+        document.documentElement.classList.remove('is-loading');
+        document.body?.classList.remove('is-loading', 'is-preloading');
+    };
+
+    const hideCartDuringLoading = () => {
+        document.documentElement.classList.add('is-loading');
+        document.body?.classList.add('is-loading');
+    };
+
+    hideCartDuringLoading();
+
+    if (document.readyState === 'complete') {
+        setReady();
+    } else {
+        window.addEventListener('load', setReady, { once: true });
+    }
+})();
+
+
+/* LDM CART FLOATING CURSOR */
+(() => {
+    const initCartCursor = () => {
+        const cursor = document.querySelector('[data-cursor-root], .cursor');
+
+        if (!cursor) return;
+
+        document.querySelectorAll(
+            '[data-cart-open], .cart-button, .cart-toggle, .floating-cart'
+        ).forEach((button) => {
+            button.addEventListener('mouseenter', () => {
+                cursor.classList.add('is-active');
+                cursor.classList.add('is-button');
+                cursor.classList.add('is-cart');
+                cursor.classList.remove('is-contrast');
+            });
+
+            button.addEventListener('mouseleave', () => {
+                cursor.classList.remove(
+                    'is-active',
+                    'is-button',
+                    'is-cart'
+                );
+            });
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCartCursor, {
+            once: true
+        });
+    } else {
+        initCartCursor();
+    }
+})();
+
+
+/* LDM CART DISPLAY NAME NUMBER QUANTITY */
+(() => {
+    const getCartStorage = () => {
+        try {
+            return JSON.parse(localStorage.getItem('ldmCart') || '{}');
+        } catch {
+            return {};
+        }
+    };
+
+    const renderCartSimple = () => {
+        const container = document.querySelector(
+            '[data-cart-items-list]'
+        );
+
+        if (!container) return;
+
+        const cart = getCartStorage();
+        const entries = Object.values(cart).filter(
+            (item) => Number(item.quantity) > 0
+        );
+
+        if (!entries.length) {
+            container.innerHTML =
+                '<p class="cart-empty">Votre panier est vide.</p>';
+            return;
+        }
+
+        container.innerHTML = entries.map((item) => {
+            const name = item.name || item.productName || 'Produit';
+            const number =
+                item.number ||
+                item.productNumber ||
+                item.id ||
+                '';
+
+            const quantity = Number(item.quantity) || 0;
+
+            return `
+                <article class="cart-simple-item">
+                    <div class="cart-simple-item__info">
+                        <strong class="cart-simple-item__name">
+                            ${name}
+                        </strong>
+                        <span class="cart-simple-item__number">
+                            N° ${number}
+                        </span>
+                    </div>
+
+                    <span class="cart-simple-item__quantity">
+                        × ${quantity}
+                    </span>
+                </article>
+            `;
+        }).join('');
+    };
+
+    window.addEventListener('storage', renderCartSimple);
+
+    document.addEventListener('DOMContentLoaded', renderCartSimple);
+
+    /*
+     * Les boutons + / − existants peuvent modifier le panier.
+     * On rafraîchit l'affichage juste après leur utilisation.
+     */
+    document.addEventListener('click', (event) => {
+        if (
+            event.target.closest('[data-cart-add]') ||
+            event.target.closest('[data-cart-minus]') ||
+            event.target.closest('[data-modal-cart-add]') ||
+            event.target.closest('[data-modal-cart-minus]')
+        ) {
+            window.setTimeout(renderCartSimple, 50);
+        }
+    });
+
+    window.ldmRenderCartSimple = renderCartSimple;
+})();
+
+
+/* ============================================================
+   LDM CART PRELOADER FINAL
+   ============================================================ */
+(() => {
+  const revealCartButton = () => {
+    document.documentElement.classList.remove("is-loading", "is-preloading");
+    document.body.classList.remove("is-loading", "is-preloading");
+
+    document.documentElement.classList.add("is-loaded");
+    document.body.classList.add("is-loaded");
+
+    const cartButton = document.querySelector("[data-cart-open]");
+
+    if (cartButton) {
+      cartButton.style.removeProperty("display");
+      cartButton.removeAttribute("aria-hidden");
+    }
+  };
+
+  if (document.readyState === "complete") {
+    window.setTimeout(revealCartButton, 100);
+  } else {
+    window.addEventListener("load", () => {
+      window.setTimeout(revealCartButton, 100);
+    }, { once: true });
+  }
+})();
+
+
+/* ============================================================
+   LDM — CTA EXPLORER LES LUMINAIRES
+   Mini transition blanche — 1.5 seconde
+   Puis affichage de la section Luminaires
+   ============================================================ */
+
+(() => {
+    const transition = document.querySelector('[data-univers-transition]');
+
+    if (!transition) {
+        console.warn('LDM UNIVERS: transition introuvable');
+        return;
+    }
+
+    const links = Array.from(document.querySelectorAll('a, button'));
+
+    const universLinks = links.filter((element) => {
+        const text = element.textContent
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+
+        return text.includes('explorer les luminaires');
+    });
+
+    if (!universLinks.length) {
+        console.warn('LDM UNIVERS: CTA introuvable');
+        return;
+    }
+
+    universLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+
+            if (!href || !href.includes('#univers')) {
+                return;
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const luminaires = document.querySelector('#luminaires');
+
+            transition.setAttribute('aria-hidden', 'false');
+            transition.classList.remove('is-finished');
+            transition.classList.add('is-active');
+
+            window.setTimeout(() => {
+                transition.classList.remove('is-active');
+                transition.classList.add('is-finished');
+
+                if (luminaires) {
+                    luminaires.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+
+                window.setTimeout(() => {
+                    transition.setAttribute('aria-hidden', 'true');
+                }, 250);
+            }, 1500);
+        });
+    });
+
+    console.log('LDM UNIVERS: CTA luminaires initialisé');
+})();
+
+
+/* ============================================================
+   LDM CART PAYMENT CHOICE
+   Panier → choix du paiement
+   ============================================================ */
+
+(() => {
+    const cart = document.querySelector('[data-cart-drawer]');
+
+    if (!cart) return;
+
+    const checkout = cart.querySelector('[data-cart-checkout]');
+    const payment = cart.querySelector('[data-cart-payment]');
+    const paymentBack = cart.querySelector('[data-cart-payment-back]');
+    const paymentMethods = cart.querySelectorAll('[data-payment-method]');
+
+    if (!checkout || !payment) return;
+
+    const showPayment = (event) => {
+        event?.preventDefault();
+        event?.stopPropagation();
+
+        payment.removeAttribute('aria-hidden');
+        payment.setAttribute('aria-hidden', 'false');
+        payment.classList.add('is-active');
+
+        cart.classList.add('is-payment');
+    };
+
+    const hidePayment = (event) => {
+        event?.preventDefault();
+        event?.stopPropagation();
+
+        payment.classList.remove('is-active');
+        payment.setAttribute('aria-hidden', 'true');
+
+        cart.classList.remove('is-payment');
+    };
+
+    checkout.addEventListener('click', showPayment, true);
+    paymentBack?.addEventListener('click', hidePayment, true);
+
+    paymentMethods.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const method = button.dataset.paymentMethod;
+
+            console.log('LDM PAYMENT:', method);
+
+            /*
+             * Pour le moment, aucun paiement réel n'est lancé.
+             * Les intégrations Orange Money / Wave seront ajoutées
+             * lorsque les identifiants et URLs de paiement seront prêts.
+             */
+
+            paymentMethods.forEach((item) => {
+                item.classList.remove('is-selected');
+            });
+
+            button.classList.add('is-selected');
+        });
+    });
+
+    console.log('LDM PAYMENT: choix de paiement initialisé');
 })();

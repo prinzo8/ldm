@@ -1244,3 +1244,2052 @@ body.legal-modal-is-open .cursor.is-contrast.is-active {
         height: 4.2rem;
     }
 }
+
+
+/* LDM_MODAL_CURSOR_BLACK_V1 */
+[data-product-modal],
+[data-product-modal] *,
+.product-modal,
+.product-modal * {
+    cursor: default;
+}
+
+[data-product-modal] a,
+[data-product-modal] button,
+.product-modal a,
+.product-modal button {
+    cursor: pointer;
+}
+
+
+/* LDM_PRODUCT_MODAL_CART_V2 */
+
+.product-modal__cart-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.product-modal__cart-button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        transform .25s ease,
+        background-color .25s ease;
+}
+
+.product-modal__cart-button:hover {
+    background: #111;
+    transform: scale(1.08);
+}
+
+.product-modal__cart-button:active {
+    transform: scale(.94);
+}
+
+.product-modal__cart-quantity {
+    min-width: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+}
+
+
+/* ============================================================
+   LDM_CART_CSS_V2
+   ============================================================ */
+
+html.is-loading .ldm-cart,
+html.is-loading .ldm-cart-trigger,
+body.is-loading .ldm-cart,
+body.is-loading .ldm-cart-trigger {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.product-modal .cart-cursor-black,
+.product-modal__cart-controls button,
+.ldm-cart .cart-cursor-black,
+.ldm-cart-trigger {
+  cursor: pointer;
+}
+
+.product-modal__cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.product-modal__cart-button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.product-modal__cart-quantity {
+  min-width: 28px;
+  text-align: center;
+  color: #000;
+}
+
+.product-modal__cart-add {
+  margin-left: 8px;
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.ldm-cart-trigger {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 900;
+  border: 0;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: inherit;
+}
+
+.ldm-cart-trigger b {
+  min-width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ldm-cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(430px, 92vw);
+  height: 100vh;
+  z-index: 1000;
+  background: #fff;
+  color: #000;
+  transform: translateX(105%);
+  transition: transform .4s ease;
+  box-shadow: -20px 0 60px rgba(0,0,0,.12);
+}
+
+.ldm-cart.is-open {
+  transform: translateX(0);
+}
+
+.ldm-cart__inner {
+  padding: 50px 32px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.ldm-cart__close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.ldm-cart__items {
+  margin: 30px 0;
+}
+
+.ldm-cart__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.ldm-cart__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+@media (max-width: 600px) {
+  .ldm-cart-trigger {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .product-modal__cart-controls {
+    flex-wrap: wrap;
+  }
+
+  .product-modal__cart-add {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+
+.ldm-cart-trigger__icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+
+/* LDM_CART_PRELOADER_FIX */
+.ldm-cart-trigger,
+.ldm-cart {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.is-loaded .ldm-cart-trigger,
+body.is-loaded .ldm-cart {
+  opacity: 1;
+  visibility: visible;
+}
+
+html.is-loading .ldm-cart-trigger,
+html.is-loading .ldm-cart {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+
+/* LDM CART VISIBILITY FIX */
+[data-cart-drawer],
+.cart-drawer,
+[data-cart-panel],
+.cart-panel {
+    display: none;
+}
+
+body.cart-is-open [data-cart-drawer],
+body.cart-is-open .cart-drawer,
+body.cart-is-open [data-cart-panel],
+body.cart-is-open .cart-panel {
+    display: block;
+}
+
+/* Le panier reste invisible pendant le préchargement */
+body.is-loading [data-cart-drawer],
+body.is-loading .cart-drawer,
+body.is-loading [data-cart-panel],
+body.is-loading .cart-panel {
+    display: none !important;
+}
+
+
+/* LDM CART LOADING BUTTON FIX */
+
+/* Le bouton panier flottant est totalement invisible pendant le préchargement */
+html.is-loading .cart-button,
+html.is-loading .cart-toggle,
+html.is-loading [data-cart-open],
+html.is-loading .floating-cart,
+body.is-loading .cart-button,
+body.is-loading .cart-toggle,
+body.is-loading [data-cart-open],
+body.is-loading .floating-cart,
+.is-preloading .cart-button,
+.is-preloading .cart-toggle,
+.is-preloading [data-cart-open],
+.is-preloading .floating-cart {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+
+
+
+/* LDM FINAL CART MOTION */
+
+/* Le bouton panier est caché uniquement pendant le préchargement */
+html.is-loading .cart-button,
+html.is-loading .cart-toggle,
+html.is-loading [data-cart-open],
+html.is-loading .floating-cart,
+body.is-loading .cart-button,
+body.is-loading .cart-toggle,
+body.is-loading [data-cart-open],
+body.is-loading .floating-cart,
+.is-preloading .cart-button,
+.is-preloading .cart-toggle,
+.is-preloading [data-cart-open],
+.is-preloading .floating-cart {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Le tiroir panier est fermé par défaut */
+[data-cart-drawer],
+.cart-drawer,
+[data-cart-panel],
+.cart-panel {
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        transform .45s cubic-bezier(.22,.61,.36,1),
+        opacity .3s ease,
+        visibility 0s linear .45s;
+}
+
+/* Ouverture : droite -> gauche */
+body.cart-is-open [data-cart-drawer],
+body.cart-is-open .cart-drawer,
+body.cart-is-open [data-cart-panel],
+body.cart-is-open .cart-panel {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+        transform .45s cubic-bezier(.22,.61,.36,1),
+        opacity .3s ease,
+        visibility 0s;
+}
+
+/* Le panier reste fermé pendant le préchargement */
+html.is-loading [data-cart-drawer],
+html.is-loading .cart-drawer,
+html.is-loading [data-cart-panel],
+html.is-loading .cart-panel,
+body.is-loading [data-cart-drawer],
+body.is-loading .cart-drawer,
+body.is-loading [data-cart-panel],
+body.is-loading .cart-panel,
+.is-preloading [data-cart-drawer],
+.is-preloading .cart-drawer,
+.is-preloading [data-cart-panel],
+.is-preloading .cart-panel {
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+
+/* LDM CART RIGHT PANEL + CURSOR */
+
+/* Bouton flottant panier */
+.cart-button,
+.cart-toggle,
+[data-cart-open],
+.floating-cart {
+    cursor: none !important;
+}
+
+/* Curseur personnalisé noir sur le bouton panier */
+.cart-button:hover::after,
+.cart-toggle:hover::after,
+[data-cart-open]:hover::after,
+.floating-cart:hover::after {
+    content: "→";
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 99999;
+}
+
+/* Desktop : panneau panier fixé à droite */
+@media (min-width: 769px) {
+    [data-cart-drawer],
+    .cart-drawer,
+    [data-cart-panel],
+    .cart-panel {
+        position: fixed !important;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: auto !important;
+        width: min(460px, 42vw);
+        max-width: 460px;
+        height: 100vh;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        z-index: 10000;
+        transition:
+            transform .5s cubic-bezier(.22,.61,.36,1),
+            opacity .3s ease,
+            visibility 0s linear .5s;
+    }
+
+    body.cart-is-open [data-cart-drawer],
+    body.cart-is-open .cart-drawer,
+    body.cart-is-open [data-cart-panel],
+    body.cart-is-open .cart-panel {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+            transform .5s cubic-bezier(.22,.61,.36,1),
+            opacity .3s ease,
+            visibility 0s;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    [data-cart-drawer],
+    .cart-drawer,
+    [data-cart-panel],
+    .cart-panel {
+        position: fixed !important;
+        inset: 0;
+        width: 100%;
+        height: 100dvh;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+            transform .4s cubic-bezier(.22,.61,.36,1),
+            opacity .25s ease;
+    }
+
+    body.cart-is-open [data-cart-drawer],
+    body.cart-is-open .cart-drawer,
+    body.cart-is-open [data-cart-panel],
+    body.cart-is-open .cart-panel {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
+
+/* Préchargement : panier totalement invisible */
+html.is-loading [data-cart-open],
+html.is-loading .cart-button,
+html.is-loading .cart-toggle,
+html.is-loading .floating-cart,
+body.is-loading [data-cart-open],
+body.is-loading .cart-button,
+body.is-loading .cart-toggle,
+body.is-loading .floating-cart {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+
+/* LDM CART CURSOR TOP LAYER */
+
+/* Le bouton reste sous le curseur personnalisé */
+.cart-button,
+.cart-toggle,
+[data-cart-open],
+.floating-cart {
+    position: relative;
+    z-index: 9000 !important;
+}
+
+/* Le curseur global passe toujours au-dessus du bouton panier */
+[data-cursor-root],
+.custom-cursor,
+.cursor {
+    z-index: 999999 !important;
+    pointer-events: none !important;
+}
+
+/* État spécial du curseur au-dessus du panier */
+.cursor.is-cart,
+[data-cursor-root].is-cart,
+.custom-cursor.is-cart {
+    z-index: 1000000 !important;
+    pointer-events: none !important;
+}
+
+/* Petit cercle noir bien visible */
+.cursor.is-cart::before,
+[data-cursor-root].is-cart::before,
+.custom-cursor.is-cart::before {
+    background: #000 !important;
+    border-color: #000 !important;
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+
+/* LDM CART FLOATING RESTORE FINAL */
+
+/* Bouton panier flottant : visible normalement */
+.cart-button,
+.cart-toggle,
+[data-cart-open],
+.floating-cart {
+    position: fixed;
+    z-index: 9000;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Seulement pendant le préchargement */
+html.is-loading .cart-button,
+html.is-loading .cart-toggle,
+html.is-loading [data-cart-open],
+html.is-loading .floating-cart,
+body.is-loading .cart-button,
+body.is-loading .cart-toggle,
+body.is-loading [data-cart-open],
+body.is-loading .floating-cart,
+.is-preloading .cart-button,
+.is-preloading .cart-toggle,
+.is-preloading [data-cart-open],
+.is-preloading .floating-cart {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Curseur personnalisé au-dessus du bouton */
+[data-cursor-root],
+.custom-cursor,
+.cursor {
+    z-index: 999999 !important;
+    pointer-events: none !important;
+}
+
+[data-cursor-root].is-cart,
+.custom-cursor.is-cart,
+.cursor.is-cart {
+    z-index: 1000000 !important;
+    pointer-events: none !important;
+}
+
+
+/* LDM SIMPLE CART ITEMS */
+
+.cart-simple-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(0,0,0,.14);
+}
+
+.cart-simple-item__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.cart-simple-item__name {
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.cart-simple-item__number {
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .6;
+}
+
+.cart-simple-item__quantity {
+    flex: 0 0 auto;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.cart-empty {
+    margin: 0;
+    opacity: .6;
+}
+
+/* Curseur noir dans le panneau panier */
+body.cart-is-open [data-cursor-root],
+body.cart-is-open .custom-cursor,
+body.cart-is-open .cursor {
+    color: #000 !important;
+}
+
+/* Curseur vert sur la croix */
+body.cart-is-open [data-cursor-root].is-cart-close,
+body.cart-is-open .custom-cursor.is-cart-close,
+body.cart-is-open .cursor.is-cart-close {
+    color: #00843D !important;
+}
+
+body.cart-is-open [data-cursor-root].is-cart-close::before,
+body.cart-is-open .custom-cursor.is-cart-close::before,
+body.cart-is-open .cursor.is-cart-close::before {
+    background: #00843D !important;
+    border-color: #00843D !important;
+    color: #fff !important;
+}
+
+
+/* ============================================================
+   PANIER — CURSEUR NOIR
+   ============================================================ */
+
+.ldm-cart,
+.ldm-cart * {
+  --cart-cursor-color: #000;
+}
+
+.ldm-cart .cart-cursor-black,
+.ldm-cart .cart-qty__button,
+.ldm-cart__close {
+  cursor: none;
+}
+
+.ldm-cart .cart-cursor-black:hover,
+.ldm-cart .cart-qty__button:hover {
+  color: #000;
+}
+
+.ldm-cart__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.ldm-cart__item-name {
+  color: #000;
+}
+
+.ldm-cart__item-number {
+  color: rgba(0,0,0,.55);
+  font-size: .8rem;
+  letter-spacing: .08em;
+}
+
+.ldm-cart__item-quantity {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+
+.ldm-cart__item-quantity .cart-qty__button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ldm-cart__item-quantity > span {
+  min-width: 1.5rem;
+  text-align: center;
+  color: #000;
+}
+
+
+/* ============================================================
+   LDM CART OPEN/CLOSE CSS FIX
+   ============================================================ */
+
+.ldm-cart[hidden] {
+}
+
+.ldm-cart {
+  transform: translateX(100%);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 450ms cubic-bezier(.22, .61, .36, 1),
+    opacity 250ms ease,
+    visibility 0s linear 450ms;
+}
+
+.ldm-cart.is-open,
+.ldm-cart.is-visible {
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    transform 450ms cubic-bezier(.22, .61, .36, 1),
+    opacity 250ms ease,
+    visibility 0s linear 0s;
+}
+
+
+/* ============================================================
+   LDM CART DRAWER — OPEN/CLOSE ANIMATION
+   ============================================================ */
+
+.ldm-cart[hidden] {
+}
+
+.ldm-cart {
+  transform: translateX(100%);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 420ms cubic-bezier(.22, .61, .36, 1),
+    opacity 250ms ease,
+    visibility 0s linear 420ms;
+}
+
+.ldm-cart.is-visible,
+.ldm-cart.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    transform 420ms cubic-bezier(.22, .61, .36, 1),
+    opacity 250ms ease,
+    visibility 0s linear 0s;
+}
+
+@media (min-width: 769px) {
+  .ldm-cart {
+  }
+}
+
+
+
+.product-modal__quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.product-modal__qty-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.product-modal__qty-btn:hover {
+  transform: scale(1.08);
+}
+
+.product-modal__qty-btn:active {
+  transform: scale(.94);
+}
+
+.product-modal__qty-value {
+  min-width: 24px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+.ldm-cart-trigger::after,
+.ldm-cart-trigger:hover::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+.ldm-cart-trigger {
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.ldm-cart-trigger:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
+}
+
+.ldm-cart-trigger:hover b {
+  background: #000;
+  color: #fff;
+}
+
+
+/* LDM CART CURSOR CONTRAST FIX */
+.ldm-cart,
+.ldm-cart * {
+  cursor: none !important;
+}
+
+/* Curseur personnalisé : noir dans le panier */
+body.cart-is-open .cursor,
+body.cart-is-open [data-cursor-root],
+body.cart-is-open .custom-cursor {
+  color: #000 !important;
+  border-color: #000 !important;
+  background-color: transparent;
+}
+
+/* Curseur noir plein pour les zones claires du panier */
+body.cart-is-open .cursor::before,
+body.cart-is-open [data-cursor-root]::before,
+body.cart-is-open .custom-cursor::before {
+  background: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Boutons du panier : curseur noir */
+.ldm-cart .cart-cursor-black,
+.ldm-cart button,
+.ldm-cart a {
+  cursor: none !important;
+}
+
+/* Si le curseur possède un état "cart-close" */
+body.cart-is-open .cursor.is-cart-close,
+body.cart-is-open [data-cursor-root].is-cart-close,
+body.cart-is-open .custom-cursor.is-cart-close {
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+
+/* ============================================================
+   LDM PRODUCT MODAL — MOBILE FIX
+   ============================================================ */
+@media (max-width: 767px) {
+
+  .product-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .product-modal__sheet {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    height: min(92vh, 760px);
+    max-height: 92vh;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 22px 22px 0 0;
+    background: var(--color-ivory);
+    transform: translateY(100%);
+  }
+
+  .product-modal.is-open .product-modal__sheet {
+    transform: translateY(0);
+  }
+
+  .product-modal__image-wrap {
+    flex: 0 0 38vh;
+    min-height: 230px;
+    max-height: 360px;
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-black);
+  }
+
+  .product-modal__image-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-modal__content {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1.5rem 1.25rem 2rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .product-modal__content .eyebrow {
+    margin: 0 0 .5rem;
+    font-size: .62rem;
+  }
+
+  .product-modal__content h2 {
+    margin: 0 0 .65rem;
+    font-size: clamp(2.5rem, 11vw, 4rem);
+    line-height: .95;
+  }
+
+  .product-modal__description {
+    max-width: none;
+    margin: 0 0 1.25rem;
+    font-size: .9rem;
+    line-height: 1.55;
+  }
+
+  .product-modal__content dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 0 1.25rem;
+    padding: 1rem 0;
+  }
+
+  .product-modal__content dt {
+    margin-bottom: .35rem;
+    font-size: .55rem;
+  }
+
+  .product-modal__content dd {
+    font-size: .72rem;
+  }
+
+  .product-modal__close {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    z-index: 10;
+    width: 2.6rem;
+    height: 2.6rem;
+    background: #fff;
+    color: #000;
+    box-shadow: 0 5px 20px rgba(0,0,0,.18);
+  }
+
+  .product-modal__quantity,
+  [data-modal-cart-controls] {
+    width: 100%;
+  }
+
+  .product-modal__qty-btn {
+    min-width: 2.8rem;
+    min-height: 2.8rem;
+  }
+
+  .product-modal__content .button,
+  .product-modal__content button {
+    touch-action: manipulation;
+  }
+
+}
+
+/* LDM PRELOADER WHITE BACKGROUND */
+
+/* ============================================================
+   LDM PRELOADER — WHITE BACKGROUND
+   ============================================================ */
+html.is-loading,
+body.is-loading {
+  background: #fff !important;
+}
+
+html.is-loading::before,
+body.is-loading::before {
+  background: #fff !important;
+}
+
+.light-transition,
+.light-transition.is-active {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+/* LDM CART — HIDE DURING PRELOADER */
+
+/* ============================================================
+   LDM CART — HIDE DURING PRELOADER
+   ============================================================ */
+html.is-loading .ldm-cart-trigger,
+body.is-loading .ldm-cart-trigger,
+html.is-preloading .ldm-cart-trigger,
+body.is-preloading .ldm-cart-trigger {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(20px) !important;
+}
+
+body.is-loaded .ldm-cart-trigger {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    opacity .45s ease,
+    transform .45s ease,
+    visibility 0s linear 0s;
+}
+
+/* LDM PRELOADER — FORCE WHITE FINAL */
+
+/* ============================================================
+   LDM PRELOADER — FORCE WHITE FINAL
+   ============================================================ */
+
+/* Fond global pendant le chargement */
+html.is-loading,
+html.is-preloading,
+html.is-loading body,
+html.is-preloading body,
+body.is-loading,
+body.is-preloading {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Tous les overlays / écrans de préchargement */
+html.is-loading #preloader,
+html.is-loading .preloader,
+html.is-loading .loader,
+html.is-loading .loading-screen,
+html.is-loading .site-loader,
+html.is-loading .page-loader,
+html.is-loading .light-transition,
+html.is-preloading #preloader,
+html.is-preloading .preloader,
+html.is-preloading .loader,
+html.is-preloading .loading-screen,
+html.is-preloading .site-loader,
+html.is-preloading .page-loader,
+html.is-preloading .light-transition,
+body.is-loading #preloader,
+body.is-loading .preloader,
+body.is-loading .loader,
+body.is-loading .loading-screen,
+body.is-loading .site-loader,
+body.is-loading .page-loader,
+body.is-loading .light-transition,
+body.is-preloading #preloader,
+body.is-preloading .preloader,
+body.is-preloading .loader,
+body.is-preloading .loading-screen,
+body.is-preloading .site-loader,
+body.is-preloading .page-loader,
+body.is-preloading .light-transition {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Transition verte/noire existante */
+.light-transition {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Éléments internes de l'écran de chargement */
+.light-transition p,
+.light-transition b {
+  color: #000000 !important;
+}
+
+.light-transition span {
+  background: rgba(0, 0, 0, .18) !important;
+}
+
+.light-transition span i {
+  background: #000000 !important;
+}
+
+/* Évite qu'un pseudo-élément conserve le fond sombre */
+html.is-loading::before,
+html.is-loading::after,
+html.is-preloading::before,
+html.is-preloading::after,
+body.is-loading::before,
+body.is-loading::after,
+body.is-preloading::before,
+body.is-preloading::after {
+  background: #ffffff !important;
+}
+
+
+/* ============================================================
+   LDM — PRELOADER WHITE FINAL OVERRIDE
+   ============================================================ */
+
+/* Fond réel du preloader */
+.preloader,
+html.is-loading .preloader,
+html.is-preloading .preloader,
+body.is-loading .preloader,
+body.is-preloading .preloader {
+    background: #ffffff !important;
+    color: #12140f !important;
+}
+
+/* Ligne décorative */
+.preloader::before {
+    background: rgba(18, 20, 15, 0.12) !important;
+}
+
+/* Texte */
+.preloader__wordmark {
+    color: #12140f !important;
+}
+
+.preloader__wordmark em {
+    color: #6f9700 !important;
+}
+
+/* Compteur */
+.preloader__meta {
+    color: rgba(18, 20, 15, 0.60) !important;
+}
+
+.preloader__meta b {
+    color: #6f9700 !important;
+}
+
+/* Barre de chargement */
+.preloader__meter {
+    background: rgba(18, 20, 15, 0.16) !important;
+}
+
+.preloader__meter span {
+    background: #6f9700 !important;
+    box-shadow: none !important;
+}
+
+/* Orb */
+.preloader__orb {
+    border-color: rgba(111, 151, 0, 0.55) !important;
+}
+
+.preloader__orb span {
+    background: #6f9700 !important;
+    box-shadow: none !important;
+}
+
+/* Empêche une ancienne règle de remettre le fond sombre */
+.preloader,
+.preloader * {
+    --preloader-bg: #ffffff;
+}
+
+/* Le panier flottant reste invisible pendant tout le chargement */
+html.is-loading .ldm-cart-trigger,
+html.is-preloading .ldm-cart-trigger,
+body.is-loading .ldm-cart-trigger,
+body.is-preloading .ldm-cart-trigger {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Dès que le chargement est terminé, il redevient visible */
+html:not(.is-loading):not(.is-preloading) .ldm-cart-trigger,
+body:not(.is-loading):not(.is-preloading) .ldm-cart-trigger {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* ============================================================
+   LDM — SECTION LUMINAIRES : FOND BLANC
+   ============================================================ */
+
+#luminaires,
+section#luminaires,
+[data-section="luminaires"] {
+    background: #ffffff !important;
+    color: #12140f;
+}
+
+#luminaires::before,
+#luminaires::after,
+section#luminaires::before,
+section#luminaires::after {
+    background-color: transparent !important;
+}
+
+#luminaires .section-label,
+#luminaires .eyebrow,
+#luminaires h2,
+#luminaires h3,
+#luminaires p {
+    color: #12140f;
+}
+
+#luminaires .eyebrow {
+    color: #6f9700;
+}
+
+
+/* ============================================================
+   LDM — MINI TRANSITION CTA UNIVERS
+   1.5 secondes — légère — fond blanc
+   ============================================================ */
+
+.univers-transition {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: #ffffff !important;
+    color: #12140f;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .18s ease, visibility .18s ease;
+}
+
+.univers-transition.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.univers-transition__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.univers-transition__text {
+    color: #12140f;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    letter-spacing: -.04em;
+}
+
+.univers-transition__line {
+    display: block;
+    width: 0;
+    height: 1px;
+    background: #6f9700;
+}
+
+.univers-transition.is-active .univers-transition__line {
+    animation: univers-transition-line 1.5s ease-in-out forwards;
+}
+
+@keyframes univers-transition-line {
+    0% {
+        width: 0;
+        opacity: .4;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        width: min(12rem, 40vw);
+        opacity: 1;
+    }
+
+    100% {
+        width: min(16rem, 50vw);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .univers-transition.is-active .univers-transition__line {
+        animation: none;
+        width: min(12rem, 40vw);
+        opacity: 1;
+    }
+}
+
+
+/* ============================================================
+   LDM CART PAYMENT CHOICE CSS
+   ============================================================ */
+
+.ldm-cart__payment {
+    display: none;
+    min-height: 100%;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--color-ivory);
+    color: var(--color-ink);
+}
+
+.ldm-cart.is-payment .ldm-cart__inner > *:not(.ldm-cart__payment) {
+    display: none;
+}
+
+.ldm-cart.is-payment .ldm-cart__payment {
+    display: block;
+}
+
+.ldm-cart__back {
+    margin: 0 0 2rem;
+    padding: .5rem 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    cursor: pointer;
+}
+
+.ldm-cart__payment-header {
+    margin-bottom: 2rem;
+}
+
+.ldm-cart__payment-header .eyebrow {
+    margin: 0 0 .7rem;
+    color: #6f9700;
+}
+
+.ldm-cart__payment-header h2 {
+    margin: 0 0 .8rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: .95;
+    letter-spacing: -.05em;
+}
+
+.ldm-cart__payment-header p:not(.eyebrow) {
+    max-width: 32rem;
+    margin: 0;
+    color: rgba(18, 20, 15, .62);
+    font-size: .85rem;
+    line-height: 1.6;
+}
+
+.ldm-cart__payment-options {
+    display: grid;
+    gap: .75rem;
+}
+
+.ldm-cart__payment-option {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(18, 20, 15, .13);
+    background: #fff;
+    color: var(--color-ink);
+    text-align: left;
+    cursor: pointer;
+    transition:
+        border-color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.ldm-cart__payment-option:hover,
+.ldm-cart__payment-option.is-selected {
+    border-color: #6f9700;
+    box-shadow: 0 10px 30px rgba(18, 20, 15, .08);
+    transform: translateY(-2px);
+}
+
+.ldm-cart__payment-icon {
+    display: grid;
+    width: 3.4rem;
+    height: 3.4rem;
+    place-items: center;
+}
+
+.ldm-cart__payment-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ldm-cart__payment-copy {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.ldm-cart__payment-copy strong {
+    font-size: .9rem;
+}
+
+.ldm-cart__payment-copy small {
+    color: rgba(18, 20, 15, .55);
+    font-size: .68rem;
+}
+
+.ldm-cart__payment-arrow {
+    font-size: 1.2rem;
+    transition: transform .25s ease;
+}
+
+.ldm-cart__payment-option:hover .ldm-cart__payment-arrow {
+    transform: translateX(4px);
+}
+
+.ldm-cart__payment-note {
+    margin: 1.5rem 0 0;
+    color: rgba(18, 20, 15, .48);
+    font-size: .65rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .ldm-cart__payment {
+        padding: 1.25rem;
+    }
+
+    .ldm-cart__payment-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .ldm-cart__payment-option {
+        grid-template-columns: 3rem 1fr auto;
+        gap: .75rem;
+        padding: .8rem;
+    }
+
+    .ldm-cart__payment-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+
+/* ============================================================
+   LDM — PANIER / ÉCRAN DE PAIEMENT
+   ============================================================ */
+
+.ldm-cart.is-payment {
+    background: var(--color-ivory, #f7f6f0);
+    color: var(--color-black, #12140f);
+}
+
+.ldm-cart.is-payment .ldm-cart__inner {
+    display: none;
+}
+
+.ldm-cart__payment {
+    position: relative;
+    display: none;
+    width: 100%;
+    min-height: 100%;
+    padding: clamp(2rem, 5vw, 4rem);
+    box-sizing: border-box;
+    background: var(--color-ivory, #f7f6f0);
+    color: var(--color-black, #12140f);
+}
+
+.ldm-cart__payment.is-active {
+    display: block;
+}
+
+.ldm-cart__back {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 2.5rem;
+    padding: .65rem .9rem;
+    border: 1px solid rgba(18,20,15,.18);
+    border-radius: 999px;
+    background: transparent;
+    color: #12140f;
+    font: inherit;
+    font-size: .72rem;
+    cursor: pointer;
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+}
+
+.ldm-cart__back:hover {
+    background: #12140f;
+    border-color: #12140f;
+    color: #fff;
+}
+
+.ldm-cart__payment-header {
+    margin-bottom: 2rem;
+}
+
+.ldm-cart__payment-header .eyebrow {
+    margin: 0 0 .7rem;
+    color: #6f9700;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.ldm-cart__payment-header h2 {
+    margin: 0 0 .8rem;
+    color: #12140f;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: .95;
+}
+
+.ldm-cart__payment-header p {
+    margin: 0;
+    max-width: 30rem;
+    color: rgba(18,20,15,.62);
+    font-size: .85rem;
+    line-height: 1.6;
+}
+
+.ldm-cart__payment-options {
+    display: grid;
+    gap: .8rem;
+}
+
+.ldm-cart__payment-option {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(18,20,15,.14);
+    border-radius: 1rem;
+    background: #fff;
+    color: #12140f;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.ldm-cart__payment-option:hover {
+    border-color: rgba(18,20,15,.38);
+    box-shadow: 0 10px 30px rgba(18,20,15,.08);
+    transform: translateY(-2px);
+}
+
+.ldm-cart__payment-icon {
+    display: grid;
+    width: 3.4rem;
+    height: 3.4rem;
+    place-items: center;
+    flex: 0 0 auto;
+}
+
+.ldm-cart__payment-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ldm-cart__payment-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.ldm-cart__payment-copy strong {
+    color: #12140f;
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+.ldm-cart__payment-copy small {
+    color: rgba(18,20,15,.55);
+    font-size: .68rem;
+}
+
+.ldm-cart__payment-arrow {
+    color: #12140f;
+    font-size: 1.2rem;
+    transition: transform .25s ease;
+}
+
+.ldm-cart__payment-option:hover .ldm-cart__payment-arrow {
+    transform: translateX(4px);
+}
+
+.ldm-cart__payment-note {
+    margin: 1.5rem 0 0;
+    color: rgba(18,20,15,.48);
+    font-size: .65rem;
+    line-height: 1.5;
+}
+
+/* Curseur noir dans le panneau paiement */
+.ldm-cart .cart-cursor-black,
+.ldm-cart .ldm-cart__payment-option,
+.ldm-cart .ldm-cart__back {
+    cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .ldm-cart__payment {
+        padding: 1.5rem;
+    }
+
+    .ldm-cart__back {
+        margin-bottom: 1.8rem;
+    }
+
+    .ldm-cart__payment-header h2 {
+        font-size: 2.25rem;
+    }
+
+    .ldm-cart__payment-option {
+        grid-template-columns: 3rem 1fr auto;
+        gap: .75rem;
+        padding: .8rem;
+    }
+
+    .ldm-cart__payment-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+
+/* ============================================================
+   LDM — SCROLL INDÉPENDANT DU PANNEAU DE PAIEMENT
+   ============================================================ */
+
+.ldm-cart {
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+}
+
+.ldm-cart__inner,
+.ldm-cart__payment {
+    height: 100%;
+    max-height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ldm-cart__payment {
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+}
+
+/* Empêche le scroll de la page derrière le panneau */
+body.cart-is-open {
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+html:has(body.cart-is-open) {
+    overflow: hidden;
+}
+
+/* Le contenu du paiement reste toujours scrollable */
+.ldm-cart.is-payment .ldm-cart__payment {
+    display: block;
+    overflow-y: auto;
+}
+
+/* Masquer proprement le panier quand on est dans le paiement */
+.ldm-cart.is-payment .ldm-cart__inner {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .ldm-cart {
+        height: 100dvh;
+        max-height: 100dvh;
+    }
+
+    .ldm-cart__payment {
+        min-height: 100dvh;
+        max-height: 100dvh;
+        padding-bottom: 3rem;
+    }
+}
+
+
+/* LDM REAL PAYMENT ICONS */
+
+.ldm-cart__payment-icon {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    min-width: 3.25rem;
+    place-items: center;
+    overflow: hidden;
+    border-radius: .85rem;
+    background: #fff;
+}
+
+.ldm-cart__payment-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ldm-cart__payment-icon--orange {
+    background: #ff7900;
+}
+
+.ldm-cart__payment-icon--wave {
+    background: #1dc5f0;
+}
+
+.ldm-cart__payment-option {
+    color: var(--color-ink, #12140f);
+}
+
+.ldm-cart__payment-option:hover
+.ldm-cart__payment-icon {
+    transform: scale(1.04);
+}
+
+.ldm-cart__payment-icon {
+    transition: transform .25s ease;
+}
+
+@media (max-width: 600px) {
+
+    .ldm-cart__payment-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+        min-width: 2.8rem;
+    }
+
+}
+
+
+/* ============================================================
+   LDM — REAL PAYMENT BRAND ICONS
+   ============================================================ */
+
+.ldm-cart__payment-icon {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: 0 0 3.25rem;
+    place-items: center;
+    overflow: hidden;
+    border-radius: .85rem;
+    background: #fff;
+}
+
+.ldm-cart__payment-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.ldm-cart__payment-icon--orange {
+    background: #ff7900;
+}
+
+.ldm-cart__payment-icon--wave {
+    background: #1dc5f0;
+}
+
+.ldm-cart__payment-option:hover
+.ldm-cart__payment-icon {
+    transform: scale(1.04);
+}
+
+.ldm-cart__payment-icon {
+    transition:
+        transform .25s ease;
+}
+
+@media (max-width: 600px) {
+
+    .ldm-cart__payment-icon {
+        width: 2.9rem;
+        height: 2.9rem;
+        flex-basis: 2.9rem;
+        border-radius: .75rem;
+    }
+
+}
+
+
+/* ============================================================
+   LDM — PAYMENT BRAND ICONS
+   ============================================================ */
+
+.ldm-cart__payment-icon {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: 0 0 3.25rem;
+    place-items: center;
+    overflow: hidden;
+    border-radius: .85rem;
+    background: #fff;
+}
+
+.ldm-cart__payment-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.ldm-cart__payment-icon--orange {
+    background: #ff7900;
+}
+
+.ldm-cart__payment-icon--wave {
+    background: #1dc5f0;
+}
+
+.ldm-cart__payment-option {
+    color: var(--color-ink, #12140f);
+}
+
+.ldm-cart__payment-option:hover .ldm-cart__payment-icon {
+    transform: scale(1.04);
+}
+
+.ldm-cart__payment-icon {
+    transition: transform .25s ease;
+}
+
+@media (max-width: 600px) {
+    .ldm-cart__payment-icon {
+        width: 2.9rem;
+        height: 2.9rem;
+        flex-basis: 2.9rem;
+        border-radius: .75rem;
+    }
+}
+
+
+/* LDM — WhatsApp à gauche sur ordinateur */
+@media (min-width: 769px) {
+    .whatsapp-float,
+    .whatsapp-button,
+    .floating-whatsapp,
+    [data-whatsapp],
+    [class*="whatsapp"] {
+        left: 2rem !important;
+        right: auto !important;
+        transform: none !important;
+    }
+}
+
+
+/* LDM — Barre de progression centrée sur mobile */
+@media (max-width: 768px) {
+    .progress-bar,
+    .site-progress,
+    .page-progress,
+    [data-progress],
+    [data-scroll-progress] {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        z-index: 90 !important;
+    }
+}
+
+/* LDM — TEXTE HERO / LUMIERE EN NOIR */
+.hero p,
+.hero__subtitle,
+.hero__description,
+.hero__intro,
+[data-hero-description] {
+    color: #12140F !important;
+}
+
+/* ============================================================
+   LDM — HERO : "La lumière raconte..." EN NOIR
+   Désactivation forcée des filtres / effets blancs
+   ============================================================ */
+
+.hero,
+.hero *,
+.hero__content,
+.hero__content *,
+.hero__description,
+.hero__description *,
+.hero__subtitle,
+.hero__subtitle *,
+[data-hero-description],
+[data-hero-description] * {
+    filter: none !important;
+}
+
+.hero__description,
+.hero__subtitle,
+[data-hero-description] {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+}
+
+.hero__description::before,
+.hero__description::after,
+.hero__subtitle::before,
+.hero__subtitle::after,
+[data-hero-description]::before,
+[data-hero-description]::after {
+    color: #000000 !important;
+    background: transparent !important;
+    filter: none !important;
+}
+
+/* ============================================================
+   LDM — LA MAISON : TEXTE INTRO EN NOIR
+   ============================================================ */
+
+#maison,
+#maison *,
+[data-section="maison"],
+[data-section="maison"] * {
+    filter: none !important;
+}
+
+#maison p,
+#maison .eyebrow,
+#maison .section-intro,
+#maison .section-intro p,
+#maison [class*="description"],
+#maison [class*="intro"],
+#maison [class*="text"],
+[data-section="maison"] p,
+[data-section="maison"] [class*="intro"],
+[data-section="maison"] [class*="description"] {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+}
+
+/* ============================================================
+   LDM — HERO : TEXTES BLANCS
+   ============================================================ */
+
+.hero,
+.hero__content,
+.hero__content * {
+    color: #ffffff !important;
+}
+
+.hero__content * {
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: none;
+}
+
+/* ============================================================
+   LDM — CTA HERO : BLANC / TEXTE NOIR
+   ============================================================ */
+
+.hero a.button,
+.hero button.button,
+.hero .button,
+.hero__content a.button,
+.hero__content .button {
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    border-color: #ffffff !important;
+}
+
+.hero a.button:hover,
+.hero button.button:hover,
+.hero .button:hover,
+.hero__content a.button:hover,
+.hero__content .button:hover {
+    background: #f2f2f2 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    border-color: #f2f2f2 !important;
+}
+
+/* LDM — CTA HERO : TEXTE NOIR FORCE */
+.hero .button,
+.hero .button *,
+.hero a.button,
+.hero a.button *,
+.hero__content .button,
+.hero__content .button * {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
+}
+
+/* LDM — CTA HERO : HOVER VERT */
+.hero .button:hover,
+.hero .button:hover *,
+.hero a.button:hover,
+.hero a.button:hover *,
+.hero__content .button:hover,
+.hero__content .button:hover * {
+    background-color: var(--color-green) !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    border-color: var(--color-green) !important;
+    text-shadow: none !important;
+}
