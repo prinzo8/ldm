@@ -1,1 +1,0 @@
-<?php get_template_part( 'template-parts/product-section', null, array( 'term' => 'art-de-la-table', 'id' => 'art-de-la-table', 'eyebrow' => '02 · Art de la table', 'title' => 'L’élégance jusque dans', 'accent' => 'les moindres détails.', 'intro' => 'Des matières qui se touchent, des formes qui invitent, des tables qui deviennent le cœur de la maison.' ) ); ?>

@@ -1,0 +1,28 @@
+# WordPress / serveur
+*.php
+!404.php
+!index.php
+
+# Backups
+*.bak
+*.bak-*
+*.backup
+*.backup-*
+.before-*
+.cart-*
+.catalog-*
+.checkout-*
+.cleanup-*
+.final-*
+.front-*
+.single-*
+.popup-*
+.modal-*
+.product-*
+.functions-*
+.main-*
+.footer-*
+
+# Fichiers système
+.DS_Store
+Thumbs.db
