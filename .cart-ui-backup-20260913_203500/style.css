@@ -1,0 +1,365 @@
+/*
+Theme Name: Lumière du Monde
+Theme URI: https://lumiere-du-monde.example
+Author: Lumière du Monde
+Description: Immersive premium showroom theme for luminaires and interior design.
+Version: 4.0.0
+Text Domain: lumiere-du-monde
+Requires at least: 6.0
+Requires PHP: 8.0
+License: GPL-2.0-or-later
+*/
+
+
+/* =========================
+   LDM CART
+   ========================= */
+
+.ldm-cart-toggle {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid currentColor;
+  background: var(--color-dark, #151515);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ldm-cart-toggle b {
+  min-width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  font-size: 11px;
+}
+
+.ldm-cart-toggle b[hidden] {
+  display: none;
+}
+
+.ldm-cart {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.ldm-cart.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.ldm-cart__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.ldm-cart__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(520px, 100%);
+  height: 100%;
+  padding: 34px;
+  box-sizing: border-box;
+  background: #f5f1e9;
+  color: #171717;
+  transform: translateX(100%);
+  transition: transform .45s cubic-bezier(.77,0,.18,1);
+  display: flex;
+  flex-direction: column;
+}
+
+.ldm-cart.is-open .ldm-cart__backdrop {
+  opacity: 1;
+}
+
+.ldm-cart.is-open .ldm-cart__panel {
+  transform: translateX(0);
+}
+
+.ldm-cart__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.ldm-cart__header h2 {
+  margin: 8px 0 0;
+}
+
+.ldm-cart__close {
+  border: 0;
+  background: none;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.ldm-cart__items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 0;
+}
+
+.ldm-cart__empty {
+  padding: 50px 0;
+  opacity: .65;
+}
+
+.ldm-cart__empty[hidden] {
+  display: none;
+}
+
+.ldm-cart-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.ldm-cart-item__image {
+  width: 90px;
+  height: 110px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.ldm-cart-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ldm-cart-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ldm-cart-item__body > span {
+  opacity: .65;
+  font-size: 13px;
+}
+
+.ldm-cart-item__actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+}
+
+.ldm-cart-item__actions button {
+  border: 1px solid rgba(0,0,0,.25);
+  background: transparent;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+.ldm-cart-item__actions [data-cart-remove] {
+  border: 0;
+  margin-left: auto;
+  text-decoration: underline;
+}
+
+.ldm-cart__footer {
+  padding-top: 22px;
+  border-top: 1px solid rgba(0,0,0,.15);
+}
+
+.ldm-cart__total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.ldm-cart__checkout {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  background: #171717;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ldm-cart__checkout:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+html.ldm-cart-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .ldm-cart-toggle {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .ldm-cart__panel {
+    padding: 24px 18px;
+  }
+}
+
+
+/* =========================
+   LDM CHECKOUT
+   ========================= */
+
+.ldm-checkout {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ldm-checkout.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.ldm-checkout__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.ldm-checkout__panel {
+  position: absolute;
+  inset: 0;
+  margin-left: auto;
+  width: min(680px, 100%);
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 34px;
+  background: #f5f1e9;
+  color: #171717;
+  transform: translateX(100%);
+  transition: transform .45s cubic-bezier(.77,0,.18,1);
+}
+
+.ldm-checkout.is-open .ldm-checkout__backdrop {
+  opacity: 1;
+}
+
+.ldm-checkout.is-open .ldm-checkout__panel {
+  transform: translateX(0);
+}
+
+.ldm-checkout__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.ldm-checkout__header h2 {
+  margin: 8px 0 0;
+}
+
+.ldm-checkout__close {
+  border: 0;
+  background: none;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.ldm-checkout__content {
+  padding-top: 30px;
+}
+
+.ldm-checkout__summary {
+  padding-bottom: 25px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.ldm-checkout__summary-items {
+  margin: 15px 0;
+}
+
+.ldm-checkout__summary-items > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.ldm-checkout__summary-total {
+  display: block;
+  text-align: right;
+  font-size: 20px;
+}
+
+.ldm-checkout__form {
+  display: grid;
+  gap: 20px;
+}
+
+.ldm-checkout__form label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.ldm-checkout__form input,
+.ldm-checkout__form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,.25);
+  background: transparent;
+  padding: 13px;
+  color: inherit;
+  font: inherit;
+}
+
+.ldm-checkout__submit {
+  margin-top: 8px;
+  padding: 16px;
+  border: 0;
+  background: #171717;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ldm-checkout__submit:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+
+.ldm-checkout__message {
+  min-height: 22px;
+  font-size: 13px;
+}
+
+html.ldm-checkout-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .ldm-checkout__panel {
+    padding: 24px 18px;
+  }
+}

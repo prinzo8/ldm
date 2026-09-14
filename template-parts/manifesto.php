@@ -1,0 +1,1 @@
+<section class="manifesto section-light" id="univers"><div class="page-width manifesto__grid"><div><div class="section-label">Une signature, une lumière</div><h2>Des luminaires qui<br><em>font ressentir.</em></h2></div></div><div class="manifesto__rule page-width"><span>01</span><div></div><span>01</span></div></section>

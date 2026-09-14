@@ -1,0 +1,124 @@
+<?php
+/**
+ * Demonstration product collection. Product custom posts can replace this
+ * source later without changing the presentation components.
+ *
+ * @package LumiereDuMonde
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+function ldm_demo_products() {
+	return array(
+		array(
+			'id' => 'opale', 'universe' => 'luminaires', 'number' => '01', 'name' => 'Opale', 'category' => 'Suspension sculpturale', 'price' => '345 000 FCFA', 'availability' => 'En stock', 'image' => 'opale.jpg',
+			'alt' => 'Suspension Opale en verre opalin dans un salon contemporain', 'description' => 'Une présence laiteuse et généreuse, pensée pour ancrer les salons dans une lumière douce et enveloppante.', 'tagline' => 'La lumière comme une matière.',
+		),
+		array(
+			'id' => 'alba', 'universe' => 'luminaires', 'number' => '02', 'name' => 'Alba', 'category' => 'Lustre linéaire', 'price' => '420 000 FCFA', 'availability' => 'Sur commande', 'image' => 'alba.jpg',
+			'alt' => 'Lustre Alba à globes opalins au-dessus d’une table de salle à manger', 'description' => 'Six sphères diffusantes composent un rythme lumineux précis pour les grandes tablées et les lignes architecturales.', 'tagline' => 'Un horizon de lumière.',
+		),
+		array(
+			'id' => 'naya', 'universe' => 'luminaires', 'number' => '03', 'name' => 'Naya', 'category' => 'Duo de suspensions', 'price' => 'Prix sur demande', 'availability' => 'En stock', 'image' => 'naya.jpg',
+			'alt' => 'Duo de suspensions Naya en verre fumé dans une chambre premium', 'description' => 'Des volumes fumés en apesanteur, dessinés pour créer une intimité sculpturale de chaque côté du lit.', 'tagline' => 'Deux lueurs, une intimité.',
+		),
+		array(
+			'id' => 'sillage', 'universe' => 'luminaires', 'number' => '04', 'name' => 'Sillage', 'category' => 'Plafonnier architectural', 'price' => '560 000 FCFA', 'availability' => 'Sur commande', 'image' => 'sillage.jpg',
+			'alt' => 'Plafonnier Sillage dans une entrée architecturale avec escalier courbe', 'description' => 'Une ligne en mouvement qui accompagne les volumes du lieu et signe les entrées à forte personnalité.', 'tagline' => 'Dessiner l’arrivée.',
+		),
+		array(
+			'id' => 'orbit', 'universe' => 'luminaires', 'number' => '05', 'name' => 'Orbit', 'category' => 'Anneau LED', 'price' => '310 000 FCFA', 'availability' => 'En stock', 'image' => 'orbit.jpg',
+			'alt' => 'Suspension circulaire Orbit dans un intérieur minimaliste', 'description' => 'Un anneau de lumière continu, net et silencieux, qui transforme le minimalisme en point de vue.', 'tagline' => 'Le geste essentiel.',
+		),
+		array(
+			'id' => 'kora', 'universe' => 'luminaires', 'number' => '06', 'name' => 'Kora', 'category' => 'Suspension tressée', 'price' => 'Prix sur demande', 'availability' => 'Indisponible', 'image' => 'kora.jpg',
+			'alt' => 'Suspension Kora tressée et ambrée dans un salon contemporain africain', 'description' => 'Un dialogue entre fibre, verre ambré et savoir-faire, pour les intérieurs qui recherchent une chaleur rare.', 'tagline' => 'La main dans la lumière.',
+		),
+		array(
+			'id' => 'amani', 'universe' => 'tableware', 'number' => '01', 'name' => 'Amani', 'category' => 'Assiette en porcelaine', 'price' => '35 000 FCFA', 'availability' => 'En stock', 'image' => 'amani.jpg',
+			'alt' => 'Assiette Amani en porcelaine ivoire avec liseré vert', 'description' => 'Une assiette en porcelaine ivoire, cernée d’un filet vert signature pour donner une énergie discrète à la table.', 'tagline' => 'Le premier cercle.',
+		),
+		array(
+			'id' => 'selene', 'universe' => 'tableware', 'number' => '02', 'name' => 'Sélène', 'category' => 'Tasse et soucoupe', 'price' => '28 000 FCFA', 'availability' => 'En stock', 'image' => 'selene.jpg',
+			'alt' => 'Tasse Sélène en porcelaine ivoire avec intérieur vert', 'description' => 'Une tasse contemporaine à la prise douce, dont l’émail vert révèle un moment de café comme un rituel.', 'tagline' => 'Un matin précieux.',
+		),
+		array(
+			'id' => 'sira', 'universe' => 'tableware', 'number' => '03', 'name' => 'Sira', 'category' => 'Carafe en verre', 'price' => '75 000 FCFA', 'availability' => 'Sur commande', 'image' => 'sira.jpg',
+			'alt' => 'Carafe Sira en verre soufflé avec verres transparents', 'description' => 'Une carafe en verre soufflé aux lignes pures, imaginée pour capter le jour, l’eau et le geste du service.', 'tagline' => 'La transparence en mouvement.',
+		),
+		array(
+			'id' => 'eclat', 'universe' => 'tableware', 'number' => '04', 'name' => 'Éclat', 'category' => 'Set de verres', 'price' => '95 000 FCFA', 'availability' => 'En stock', 'image' => 'eclat.jpg',
+			'alt' => 'Set Éclat de quatre verres en cristal', 'description' => 'Quatre silhouettes de cristal qui redessinent la lumière de la table avec une précision presque musicale.', 'tagline' => 'Boire la lumière.',
+		),
+		array(
+			'id' => 'kasa', 'universe' => 'tableware', 'number' => '05', 'name' => 'Kasa', 'category' => 'Bol de service', 'price' => '48 000 FCFA', 'availability' => 'En stock', 'image' => 'kasa.jpg',
+			'alt' => 'Bol Kasa en porcelaine ivoire et cuillère assortie', 'description' => 'Un bol de porcelaine aux bords organiques qui porte fruits, compositions et gestes partagés avec évidence.', 'tagline' => 'Le centre de table.',
+		),
+		array(
+			'id' => 'ivoire', 'universe' => 'tableware', 'number' => '06', 'name' => 'Ivoire', 'category' => 'Service de table', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'ivoire.jpg',
+			'alt' => 'Service Ivoire complet avec porcelaine, carafe, verres et couverts', 'description' => 'Une composition complète de porcelaine, verre et couverts pour les grands moments et les maisons qui reçoivent.', 'tagline' => 'Recevoir avec éclat.',
+		),
+		array(
+			'id' => 'ldm-extra-luminaire-07', 'universe' => 'luminaires', 'number' => '07', 'name' => 'Sélène', 'category' => 'Suspension lumineuse', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'luminaire-01.jpg',
+			'alt' => 'Suspension Sélène en finition élégante', 'description' => 'Une silhouette suspendue pensée pour créer une lumière douce et sculpturale au-dessus des espaces de vie.', 'tagline' => 'Une lumière suspendue.',
+		),
+		array(
+			'id' => 'ldm-extra-luminaire-08', 'universe' => 'luminaires', 'number' => '08', 'name' => 'Noma', 'category' => 'Lampe décorative', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'luminaire-02.jpg',
+			'alt' => 'Lampe décorative Noma', 'description' => 'Une présence discrète et chaleureuse qui accompagne les intérieurs avec une lumière enveloppante.', 'tagline' => 'La douceur en lumière.',
+		),
+		array(
+			'id' => 'ldm-extra-luminaire-09', 'universe' => 'luminaires', 'number' => '09', 'name' => 'Auréa', 'category' => 'Lampe de table', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'luminaire-03.jpg',
+			'alt' => 'Lampe de table Auréa', 'description' => 'Une lampe de caractère destinée aux consoles, tables d’appoint et espaces où la matière rencontre la lumière.', 'tagline' => 'Le détail lumineux.',
+		),
+		array(
+			'id' => 'ldm-extra-luminaire-10', 'universe' => 'luminaires', 'number' => '10', 'name' => 'Oria', 'category' => 'Suspension', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'luminaire-04.jpg',
+			'alt' => 'Suspension Oria', 'description' => 'Une composition lumineuse contemporaine qui structure l’espace tout en conservant une présence légère.', 'tagline' => 'Dessiner l’espace.',
+		),
+		array(
+			'id' => 'ldm-extra-luminaire-11', 'universe' => 'luminaires', 'number' => '11', 'name' => 'Néa', 'category' => 'Éclairage décoratif', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'luminaire-05.jpg',
+			'alt' => 'Éclairage décoratif Néa', 'description' => 'Une pièce décorative pensée pour transformer une atmosphère par petites touches de lumière.', 'tagline' => 'Une présence douce.',
+		),
+		array(
+			'id' => 'ldm-extra-luminaire-12', 'universe' => 'luminaires', 'number' => '12', 'name' => 'Luma', 'category' => 'Pièce lumineuse', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'luminaire-06.jpg',
+			'alt' => 'Pièce lumineuse Luma', 'description' => 'Une pièce expressive qui associe matière, volume et lumière pour signer un intérieur.', 'tagline' => 'La lumière comme matière.',
+		),
+		array(
+			'id' => 'ldm-extra-tableware-07', 'universe' => 'tableware', 'number' => '07', 'name' => 'Sienna', 'category' => 'Assiette en porcelaine', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'tableware-01.jpg',
+			'alt' => 'Assiette Sienna en porcelaine', 'description' => 'Une assiette aux lignes sobres pensée pour composer une table élégante au quotidien comme pour recevoir.', 'tagline' => 'L’élégance au quotidien.',
+		),
+		array(
+			'id' => 'ldm-extra-tableware-08', 'universe' => 'tableware', 'number' => '08', 'name' => 'Alba', 'category' => 'Verre de table', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'tableware-02.jpg',
+			'alt' => 'Verre Alba pour la table', 'description' => 'Un verre délicat qui apporte transparence et rythme à une composition de table contemporaine.', 'tagline' => 'La transparence en scène.',
+		),
+		array(
+			'id' => 'ldm-extra-tableware-09', 'universe' => 'tableware', 'number' => '09', 'name' => 'Céleste', 'category' => 'Carafe', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'tableware-03.jpg',
+			'alt' => 'Carafe Céleste', 'description' => 'Une carafe sculpturale qui accompagne les grandes tablées avec simplicité et caractère.', 'tagline' => 'Servir avec caractère.',
+		),
+		array(
+			'id' => 'ldm-extra-tableware-10', 'universe' => 'tableware', 'number' => '10', 'name' => 'Épure', 'category' => 'Assiette de présentation', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'tableware-04.jpg',
+			'alt' => 'Assiette Épure de présentation', 'description' => 'Une pièce de présentation conçue pour mettre en valeur les compositions culinaires et florales.', 'tagline' => 'Mettre en valeur.',
+		),
+		array(
+			'id' => 'ldm-extra-tableware-11', 'universe' => 'tableware', 'number' => '11', 'name' => 'Maya', 'category' => 'Tasse en porcelaine', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'tableware-05.jpg',
+			'alt' => 'Tasse Maya en porcelaine', 'description' => 'Une tasse raffinée dont les proportions et la matière invitent à ralentir le geste.', 'tagline' => 'Le plaisir du geste.',
+		),
+		array(
+			'id' => 'ldm-extra-tableware-12', 'universe' => 'tableware', 'number' => '12', 'name' => 'Sora', 'category' => 'Pièce de service', 'price' => 'Prix sur demande', 'availability' => 'Sur commande', 'image' => 'tableware-06.jpg',
+			'alt' => 'Pièce de service Sora', 'description' => 'Une pièce de service contemporaine imaginée pour compléter une table généreuse et lumineuse.', 'tagline' => 'Composer autrement.',
+		)
+	);
+}
+
+function ldm_get_products( $universe = '' ) {
+	$products = ldm_demo_products();
+	if ( $universe ) {
+		$products = array_values( array_filter( $products, function( $product ) use ( $universe ) {
+			return $product['universe'] === $universe;
+		} ) );
+	}
+	return $products;
+}
+
+function ldm_get_product_image_url( $product ) {
+	return trailingslashit( get_template_directory_uri() ) . 'assets/images/products/' . rawurlencode( $product['image'] );
+}
